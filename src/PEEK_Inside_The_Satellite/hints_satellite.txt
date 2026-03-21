@@ -1,0 +1,14 @@
+# === SATELLITE ACCESS TERMINAL ===
+enter access code (3 attempts):
+> 400
+[-] Invalid code.
+[hint] the code is numeric.
+
+> 400
+[-] Invalid code.
+[hint] think small.. (4 digits)
+
+> 1000
+[-] Invalid code.
+[hint] not everything is in the UI...
+>
