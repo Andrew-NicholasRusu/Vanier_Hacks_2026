@@ -1,0 +1,9 @@
+teamName : Final_Framework
+teamPassword: 1235
+
+{
+  "teamName": "Final Framework",
+  "teamId": "adfad",
+  "authKey": "dd2508ee-02f7-4da7-a79f-98b56f624e9b"
+}
+
