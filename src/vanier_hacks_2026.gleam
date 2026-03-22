@@ -10,7 +10,8 @@ import gleam/string
 import input.{input}
 
 pub fn main() {
-  let assert Ok(mode) = input("Mode (submit|wireshark|satellite|signal): ")
+  let assert Ok(mode) =
+    input("Mode (submit|wireshark|satellite|website|signal): ")
 
   use res <- result.try(case mode {
     "submit" -> {
@@ -20,6 +21,7 @@ pub fn main() {
     }
     "wireshark" -> wireshark_challenge()
     "satellite" -> peek_inside_the_satellite()
+    "website" -> juniors_website()
     "signal" -> signal_noise()
     _ -> Ok("Unknown mode")
   })
@@ -55,6 +57,10 @@ fn peek_inside_the_satellite() {
     "reverseEngineering/peekInsideTheSatelite",
     "55e5fb54-f0c5-4c27-817f-4bf1348bead2",
   )
+}
+
+fn juniors_website() {
+  submit("mistakes/juniorsWebsite", "97f7ccc4-ee19-4fc2-9c9c-f4cca88f86ee")
 }
 
 fn eratosthenes(size) {
