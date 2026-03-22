@@ -35,7 +35,7 @@ fn submit(path, code) {
     |> request.prepend_header("Content-Type", "application/json")
     |> request.prepend_header(
       "Authorization",
-      "Basic WERTSUE6Yzg5MWEwMjgtMGJmZi00ZTU2LTlkYmUtZjIyN2RmZWVlM2Fj",
+      "Basic VExIVUc6MzVjNTdjYjctZDgyMS00OTJjLWI4NWMtODBiYzliMzIzNWNj",
     )
     |> request.set_body("{\"verificationCode\": \"" <> code <> "\"}")
 
@@ -46,14 +46,14 @@ fn submit(path, code) {
 fn wireshark_challenge() {
   submit(
     "networking/wiresharkChallenge",
-    "flag{4426ecee-6edd-483a-9331-f3e7ab87321e}",
+    "flag_{4426ecee-6edd-483a-9331-f3e7ab87321e}",
   )
 }
 
 fn peek_inside_the_satellite() {
   submit(
     "reverseEngineering/peekInsideTheSatelite",
-    "U28gY2xvc2UgeWV0IHNvIGZhciBhd2F5SECRET_SECTION!!NTVlNWZiNTQtZjBjNS00YzI3LTgxN2YtNGJmMTM0OGJlYWQyHELLO_FROM_SPACESXQncyBnZXR0aW5nIGxvbmVseSBoZXJl",
+    "55e5fb54-f0c5-4c27-817f-4bf1348bead2",
   )
 }
 
