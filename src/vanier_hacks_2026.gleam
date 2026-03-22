@@ -7,11 +7,12 @@ import gleam/io
 import gleam/list
 import gleam/result
 import gleam/string
+import glqr as qr
 import input.{input}
 
 pub fn main() {
   let assert Ok(mode) =
-    input("Mode (submit|wireshark|satellite|website|signal): ")
+    input("Mode (submit|wireshark|satellite|website|call|signal): ")
 
   use res <- result.try(case mode {
     "submit" -> {
@@ -22,6 +23,7 @@ pub fn main() {
     "wireshark" -> wireshark_challenge()
     "satellite" -> peek_inside_the_satellite()
     "website" -> juniors_website()
+    "call" -> you_know_who_to_call()
     "signal" -> signal_noise()
     _ -> Ok("Unknown mode")
   })
@@ -31,7 +33,7 @@ pub fn main() {
 }
 
 fn submit(path, code) {
-  let assert Ok(base_req) = request.to("http://ctf26.vanierhacks.net/" <> path)
+  let assert Ok(base_req) = request.to("http://ctf26vanierhacksnet/" <> path)
   let req =
     request.set_method(base_req, http.Post)
     |> request.prepend_header("Content-Type", "application/json")
@@ -61,6 +63,15 @@ fn peek_inside_the_satellite() {
 
 fn juniors_website() {
   submit("mistakes/juniorsWebsite", "97f7ccc4-ee19-4fc2-9c9c-f4cca88f86ee")
+}
+
+fn you_know_who_to_call() {
+  // secret password
+  // "6e098837289ca18b02f6eb97800f0f58890d9171e10cc7140e991c438419876f"
+  submit(
+    "reverseEngineering/youKnowWhoToCall",
+    "75b0724a-2a6e-4780-a533-93d811042ecb",
+  )
 }
 
 fn eratosthenes(size) {
@@ -102,39 +113,51 @@ fn signal_noise() {
     })
 
   deciphered
-  |> string.to_graphemes
-  // Black if character is prime in the alphabet
-  |> list.map(fn(c) {
-    // string.to_utf_codepoints(c)
-    // |> list.first
-    // |> force_unwrap
-    // |> string.utf_codepoint_to_int
-    // |> int.subtract(95)
-    // |> fn(i) {
-    //   case list.find(sieve, fn(n) { n == i }) {
-    //     Ok(_) -> "B"
-    //     Error(_) -> " "
-    //   }
-    // }
-
-    case c {
-      "q" | "r" | "c" | "o" | "d" | "e" -> "M"
-      "v" | "a" | "n" | "i" | "h" | "k" | "s" -> "n"
-      "b" | "u" | "m" | "p" -> "l"
-      _ -> " "
-    }
-    // c
-  })
+  // |> string.to_graphemes
+  // |> list.map(fn(c) {
+  // string.to_utf_codepoints(c)
+  // |> list.first
+  // |> force_unwrap
+  // |> string.utf_codepoint_to_int
+  // |> int.subtract(95)
+  // |> int.is_odd
+  // |> fn(i) {
+  //   case i {
+  //     True -> "B"
+  //     False -> " "
+  //   }
+  // }
+  //   case c {
+  //     "a"
+  //     | "c"
+  //     | "e"
+  //     | "g"
+  //     | "i"
+  //     | "k"
+  //     | "m"
+  //     | "o"
+  //     | "q"
+  //     | "s"
+  //     | "u"
+  //     | "w"
+  //     | "y" -> "B"
+  //     _ -> " "
+  //   }
+  // })
   // Insert newlines in string to form a square
-  |> list.sized_chunk(
-    deciphered
-    |> string.length
-    |> int.square_root
-    |> force_unwrap
-    |> float.truncate,
-  )
-  |> list.map(string.join(_, " "))
-  |> string.join("\n")
+  // |> list.sized_chunk(
+  //   deciphered
+  //   |> string.length
+  //   |> int.square_root
+  //   |> force_unwrap
+  //   |> float.truncate,
+  // )
+  // |> list.map(string.join(_, " "))
+  // |> string.join("\n")
+  |> qr.new
+  |> qr.generate
+  |> force_unwrap
+  |> qr.to_printable
   |> Ok
   // submit("cryptography/signalNoise")
 }
